@@ -13,4 +13,5 @@ public class UserLombok {
     private String password;
     private String firstName;
     private String lastName;
+
 }

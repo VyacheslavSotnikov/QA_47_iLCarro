@@ -42,7 +42,7 @@ public class LoginPage extends BasePage{
     }
 
     public boolean validatePopUpMessage(String text){
-        return isTextInElementPresent(popUpMessage, text );
+        return isTextInElementPresent(popUpMessage, text);
     }
 
     public boolean validateMessageErrorEmptyPassword(){
