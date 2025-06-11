@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import javax.swing.*;
+import java.util.List;
 
 public class SignUpPage extends BasePage{
     public SignUpPage(WebDriver driver){
@@ -34,6 +35,9 @@ public class SignUpPage extends BasePage{
     @FindBy(xpath = "//button[@type = 'submit']")
     WebElement btnYalla;
 
+    @FindBy(xpath = "//div[@class='error']")
+    List<WebElement> messageErrorNameList;
+
     public  void typeSignUpForm(UserLombok user){
         inputName.sendKeys(user.getFirstName());
         inputLastName.sendKeys(user.getLastName());
@@ -49,6 +53,19 @@ public class SignUpPage extends BasePage{
     }
 
     public  void clickBtnYalla(){
+    btnYalla.click();
+    }
 
+    public  boolean btnYallaIsEnabled(){
+        return elementIsEnabled(btnYalla);
+    }
+
+    public  boolean validateErrorMessage(String text){
+        for(WebElement e: messageErrorNameList){
+            //System.out.println(e.getText());
+            if (e.getText().contains(text))
+                return true;
+        }
+        return false;
     }
 }

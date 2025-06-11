@@ -1,5 +1,8 @@
 package utils;
 
+import lombok.Getter;
+
+@Getter
 public enum HeaderMenuItem {
     SEARCH("//a[text() = ' Search ']"),
     LET_CAR_WORK("//a[text() = ' Let the car work ']"),
@@ -10,9 +13,5 @@ public enum HeaderMenuItem {
 
     HeaderMenuItem(String locator){
         this.locator = locator;
-    }
-
-    public String getLocator(){
-        return  locator;
     }
 }
