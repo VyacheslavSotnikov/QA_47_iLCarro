@@ -142,6 +142,6 @@ public class SignUpTests extends ApplicationManager {
         signUpPage.typeSignUpForm(user);
         signUpPage.clickCheckBox();
         signUpPage.clickBtnYalla();
-        Assert.assertTrue(signUpPage.validatePopUpMessage("Registration failed"));
+        Assert.assertTrue(signUpPage.validatePopUpMessage("User already exists"));
     }
 }
