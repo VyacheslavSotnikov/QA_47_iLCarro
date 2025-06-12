@@ -130,4 +130,18 @@ public class SignUpTests extends ApplicationManager {
         signUpPage.clickBtnYalla();
         Assert.assertTrue(signUpPage.validateErrorMessage("Password must contain 1 uppercase letter, 1 lowercase letter, 1 number and one special symbol of [@$#^&*!]"));
     }
+
+    @Test
+    public void signUpNegativeTest_RegUser(){
+        UserLombok user = UserLombok.builder()
+                .firstName("Bilbo")
+                .lastName("Baggins")
+                .username("sotiga2018@gmail.com")
+                .password("Password123!")
+                .build();
+        signUpPage.typeSignUpForm(user);
+        signUpPage.clickCheckBox();
+        signUpPage.clickBtnYalla();
+        Assert.assertTrue(signUpPage.validatePopUpMessage("Registration failed"));
+    }
 }
