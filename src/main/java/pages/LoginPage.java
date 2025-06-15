@@ -1,5 +1,6 @@
 package pages;
 
+import dto.UserLombok;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,9 +33,11 @@ public class LoginPage extends BasePage{
     WebElement messageErrorIncorrectEmail;
 
 
-    public void typeLoginForm(String email, String password){
-        inputEmail.sendKeys(email);
-        inputPassword.sendKeys(password);
+    public void typeLoginForm(UserLombok user){
+        logger.info("type login form with data " + user.toString());
+        inputEmail.sendKeys(user.getUsername());
+        inputPassword.sendKeys(user.getPassword());
+        logger.info("click btn login 'Yalla' " + btnYalla.getTagName());
         btnYalla.click();
     }
 

@@ -22,7 +22,11 @@ public class LoginTests extends ApplicationManager {
 
     @Test
     public void loginPositiveTest() {
-        loginPage.typeLoginForm("sotiga2018@gmail.com", "Bilbo12345@");
+        UserLombok user = UserLombok.builder()
+                .username("sotiga2018@gmail.com")
+                .password("Bilbo12345@")
+                .build();
+        loginPage.typeLoginForm(user);
     }
 
     @Test
@@ -31,7 +35,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018@gmail.com")
                 .password("Bilbo12345@")
                 .build();
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Logged in success"), "loginPositiveTest_lombok");
     }
 
@@ -41,7 +45,7 @@ public class LoginTests extends ApplicationManager {
                 .username(generateEmail(10))
                 .password("Bilbo12345@")
                 .build();
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
     }
 
@@ -51,7 +55,7 @@ public class LoginTests extends ApplicationManager {
                 .username("")
                 .password("Bilbo12345@")
                 .build();
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorEmptyEmail(), "loginNegativeTest_EmptyEmail");
     }
 
@@ -61,7 +65,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018@gmail.com")
                 .password("")
                 .build();
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorEmptyPassword(), "loginNegativeTest_EmptyPassword");
     }
 
@@ -71,7 +75,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018gmail.com")
                 .password("Bilbo12345@")
                 .build();
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorIncorrectEmail(), "loginNegativeTest_IncorrectEmail");
     }
 
@@ -81,7 +85,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018@gmailcom")
                 .password("Bilbo12345@")
                 .build();
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
     }
 }
