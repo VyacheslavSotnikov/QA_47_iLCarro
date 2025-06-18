@@ -1,7 +1,6 @@
 package ui_tests;
 
 import dto.Car;
-import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,16 +19,7 @@ public class AddNewCarTests extends ApplicationManager {
 
     @BeforeMethod
     public void login(){
-        HomePage homePage = new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
-
-        UserLombok user = UserLombok.builder()
-                .username("bilbo_baggins_12345@mail.com")
-                .password("Password123!")
-                .build();
-
-        loginPage.typeLoginForm(user);
-
         letCarWorkPage = clickButtonsOnHeader(HeaderMenuItem.LET_CAR_WORK);
     }
 

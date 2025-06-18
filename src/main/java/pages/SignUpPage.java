@@ -39,6 +39,7 @@ public class SignUpPage extends BasePage{
     List<WebElement> messageErrorNameList;
 
     public  void typeSignUpForm(UserLombok user){
+        logger.info("type reg form with data " + user.toString());
         inputName.sendKeys(user.getFirstName());
         inputLastName.sendKeys(user.getLastName());
         inputEmail.sendKeys(user.getUsername());

@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignUpPage;
 import utils.HeaderMenuItem;
+import java.lang.reflect.Method;
 
 import static pages.BasePage.*;
 import static utils.RandomUtils.*;
@@ -26,7 +27,8 @@ public class SignUpTests extends ApplicationManager {
     }
 
     @Test
-    public void signUpPositiveTest(){
+    public void signUpPositiveTest(Method method){
+        logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
                 .firstName("Bilbo")
                 .lastName("Baggins")

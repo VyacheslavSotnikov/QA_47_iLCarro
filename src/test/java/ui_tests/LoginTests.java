@@ -7,6 +7,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+
+import java.lang.reflect.Method;
+
 import static utils.RandomUtils.*;
 
 public class LoginTests extends ApplicationManager {
@@ -21,20 +24,13 @@ public class LoginTests extends ApplicationManager {
     }
 
     @Test
-    public void loginPositiveTest() {
+    public void loginPositiveTest(Method method) {
+        logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
                 .username("sotiga2018@gmail.com")
                 .password("Bilbo12345@")
                 .build();
-        loginPage.typeLoginForm(user);
-    }
-
-    @Test
-    public void loginPositiveTest_lombok() {
-        UserLombok user = UserLombok.builder()
-                .username("sotiga2018@gmail.com")
-                .password("Bilbo12345@")
-                .build();
+        logger.info("test data -->" + user);
         loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Logged in success"), "loginPositiveTest_lombok");
     }
