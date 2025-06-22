@@ -7,12 +7,11 @@ import pages.HomePage;
 import utils.TestNGListener;
 
 @Listeners(TestNGListener.class)
-
 public class HomeTests extends ApplicationManager {
 
     @Test
-    public void FirstTest(){
-        System.out.println("Hello!!!");
+    public void firstTest(){
+        System.out.println("hello!!!");
         HomePage homePage = new HomePage(getDriver());
     }
 }

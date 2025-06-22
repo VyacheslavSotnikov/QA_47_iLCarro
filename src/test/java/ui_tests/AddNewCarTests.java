@@ -14,7 +14,6 @@ import utils.TestNGListener;
 import static pages.BasePage.*;
 import static utils.RandomUtils.*;
 @Listeners(TestNGListener.class)
-
 public class AddNewCarTests extends ApplicationManager {
 
     LoginPage loginPage;
@@ -22,7 +21,9 @@ public class AddNewCarTests extends ApplicationManager {
 
     @BeforeMethod
     public void login(){
+        new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
+        loginPage.typeLoginForm("bilbo_baggins_12345@mail.com", "Password123!");
         letCarWorkPage = clickButtonsOnHeader(HeaderMenuItem.LET_CAR_WORK);
     }
 

@@ -11,21 +11,15 @@ public class HomePage extends BasePage{
     public HomePage(WebDriver driver){
         setDriver(driver);
         driver.get("https://ilcarro.web.app/search");
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        PageFactory.initElements(
+                new AjaxElementLocatorFactory(driver, 10), this);
     }
 
     @FindBy(xpath = "//a[text()=' Log in ']")
     WebElement btnLoginHeader;
-
-    @FindBy(xpath = "//a[text()=' Sign up ']")
-    WebElement btnSignUpHeader;
+    //WebElement btnLoginHeader = driver.findElement(By.xpath("//a[text()=' Log in ']"));
 
     public void clickBtnLoginHeader(){
         btnLoginHeader.click();
     }
-
-    public void clickBtnSignUpHeader(){
-        btnSignUpHeader.click();
-    }
-
 }

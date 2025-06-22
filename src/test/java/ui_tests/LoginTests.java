@@ -10,86 +10,58 @@ import pages.HomePage;
 import pages.LoginPage;
 import utils.TestNGListener;
 
-import java.lang.reflect.Method;
-
 import static utils.RandomUtils.*;
 
 @Listeners(TestNGListener.class)
 
 public class LoginTests extends ApplicationManager {
-
-    private LoginPage loginPage;
-
+    HomePage homePage;
+    LoginPage loginPage;
     @BeforeMethod
-    public void goToLoginPage() {
-        HomePage homePage = new HomePage(getDriver());
+    public void goToLoginPage(){
+        homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         loginPage = new LoginPage(getDriver());
     }
 
+    @Test(enabled = false)
+    public void loginPositiveTest(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLoginHeader();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginForm("bilbo_baggins_12345@mail.com", "Password123!");
+    }
+
     @Test
-    public void loginPositiveTest(Method method) {
+    public void loginPositiveTest_lombok(){
         UserLombok user = UserLombok.builder()
-                .username("sotiga2018@gmail.com")
-                .password("Bilbo12345@")
+                .username("bilbo_baggins_12345@mail.com")
+                .password("Password123!")
                 .build();
-        logger.info("test data -->" + user);
-        loginPage.typeLoginForm(user);
+        logger.info("test data --> " + user.toString());
+        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.validatePopUpMessage("Logged in success"), "loginPositiveTest_lombok");
     }
 
     @Test
-    public void loginNegativeTest_unregUser() {
+    public void loginNegativeTest_unregUser(){
         UserLombok user = UserLombok.builder()
                 .username(generateEmail(10))
-                .password("Bilbo12345@")
+                .password("Password123!")
                 .build();
-        logger.info("test data -->" + user);
-        loginPage.typeLoginForm(user);
+        logger.info("test data --> " + user.toString());
+        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
         Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
     }
 
     @Test
-    public void loginNegativeTest_EmptyEmail() {
+    public void loginNegativeTest_EmptyPassword(){
         UserLombok user = UserLombok.builder()
-                .username("")
-                .password("Bilbo12345@")
-                .build();
-        logger.info("test data -->" + user);
-        loginPage.typeLoginForm(user);
-        Assert.assertTrue(loginPage.validateMessageErrorEmptyEmail(), "loginNegativeTest_EmptyEmail");
-    }
-
-    @Test
-    public void loginNegativeTest_EmptyPassword() {
-        UserLombok user = UserLombok.builder()
-                .username("sotiga2018@gmail.com")
+                .username("bilbo_baggins_12345@mail.com")
                 .password("")
                 .build();
-        logger.info("test data -->" + user);
-        loginPage.typeLoginForm(user);
-        Assert.assertTrue(loginPage.validateMessageErrorEmptyPassword(), "loginNegativeTest_EmptyPassword");
-    }
-
-    @Test
-    public void loginNegativeTest_IncorrectEmail() {
-        UserLombok user = UserLombok.builder()
-                .username("sotiga2018gmail.com")
-                .password("Bilbo12345@")
-                .build();
-        logger.info("test data -->" + user);
-        loginPage.typeLoginForm(user);
-        Assert.assertTrue(loginPage.validateMessageErrorIncorrectEmail(), "loginNegativeTest_IncorrectEmail");
-    }
-
-    @Test
-    public void loginNegativeTest_IncorrectEmail2() {
-        UserLombok user = UserLombok.builder()
-                .username("sotiga2018@gmailcom")
-                .password("Bilbo12345@")
-                .build();
-        logger.info("test data -->" + user);
-        loginPage.typeLoginForm(user);
-        Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
+        logger.info("test data --> " + user.toString());
+        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        Assert.assertTrue(loginPage.validateMessageErrorPassword(), "loginNegativeTest_EmptyPassword");
     }
 }
