@@ -6,14 +6,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignUpPage;
 import utils.HeaderMenuItem;
+import utils.TestNGListener;
+
 import java.lang.reflect.Method;
 
 import static pages.BasePage.*;
 import static utils.RandomUtils.*;
+@Listeners(TestNGListener.class)
 
 public class SignUpTests extends ApplicationManager {
 

@@ -4,13 +4,17 @@ import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import utils.TestNGListener;
 
 import java.lang.reflect.Method;
 
 import static utils.RandomUtils.*;
+
+@Listeners(TestNGListener.class)
 
 public class LoginTests extends ApplicationManager {
 
@@ -25,7 +29,6 @@ public class LoginTests extends ApplicationManager {
 
     @Test
     public void loginPositiveTest(Method method) {
-        logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
                 .username("sotiga2018@gmail.com")
                 .password("Bilbo12345@")
@@ -41,6 +44,7 @@ public class LoginTests extends ApplicationManager {
                 .username(generateEmail(10))
                 .password("Bilbo12345@")
                 .build();
+        logger.info("test data -->" + user);
         loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
     }
@@ -51,6 +55,7 @@ public class LoginTests extends ApplicationManager {
                 .username("")
                 .password("Bilbo12345@")
                 .build();
+        logger.info("test data -->" + user);
         loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorEmptyEmail(), "loginNegativeTest_EmptyEmail");
     }
@@ -61,6 +66,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018@gmail.com")
                 .password("")
                 .build();
+        logger.info("test data -->" + user);
         loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorEmptyPassword(), "loginNegativeTest_EmptyPassword");
     }
@@ -71,6 +77,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018gmail.com")
                 .password("Bilbo12345@")
                 .build();
+        logger.info("test data -->" + user);
         loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorIncorrectEmail(), "loginNegativeTest_IncorrectEmail");
     }
@@ -81,6 +88,7 @@ public class LoginTests extends ApplicationManager {
                 .username("sotiga2018@gmailcom")
                 .password("Bilbo12345@")
                 .build();
+        logger.info("test data -->" + user);
         loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
     }
