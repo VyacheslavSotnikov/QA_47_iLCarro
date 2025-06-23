@@ -29,8 +29,7 @@ public class SignUpPage extends BasePage{
     WebElement checkBox;
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYalla;
-    @FindBy(xpath = "//div[@class='error']")
-    List<WebElement> messageErrorNameList;
+
 
     public void typeSignUpForm(UserLombok user){
         inputName.sendKeys(user.getFirstName());
@@ -54,14 +53,4 @@ public class SignUpPage extends BasePage{
     public boolean btnYallaIaEnabled(){
         return elementIsEnabled(btnYalla);
     }
-
-    public boolean validateErrorMessage(String text){
-        for (WebElement e : messageErrorNameList){
-            //System.out.println(e.getText());
-            if(e.getText().contains(text))
-                return true;
-        }
-        return false;
-    }
-
 }

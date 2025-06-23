@@ -35,6 +35,4 @@ public class WDListener implements WebDriverListener {
         WebDriverListener.super.afterSendKeys(element, keysToSend);
         logger.info("use sendKeys " + element.getTagName() + " --> " + Arrays.toString(keysToSend));
     }
-
-
 }

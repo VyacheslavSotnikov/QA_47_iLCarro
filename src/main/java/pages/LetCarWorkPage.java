@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.testng.Assert;
 
 public class LetCarWorkPage extends BasePage{
     public LetCarWorkPage(WebDriver driver){
@@ -47,10 +48,39 @@ public class LetCarWorkPage extends BasePage{
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
         selectFuel.sendKeys(car.getFuel()); //!!!!!!!!!!!!!!!!!!! class select
-        inputSeats.sendKeys(car.getSeats().toString());
+        if (car.getSeats() != null) {
+            inputSeats.sendKeys(car.getSeats().toString());
+        } else {
+            inputSeats.click();
+        }
         inputCarClass.sendKeys(car.getCarClass());
         inputSerialNumber.sendKeys(car.getSerialNumber());
-        inputPrice.sendKeys(car.getPricePerDay()+"");
+        if (car.getPricePerDay() != null) {
+            inputPrice.sendKeys(car.getPricePerDay().toString());
+        } else {
+            inputPrice.click();
+        }
+        btnSubmit.click();
+    }
+
+    public void typeAddNewCarFormEmptyLoc(Car car) {
+        inputCity.sendKeys(car.getCity());
+        inputManufacture.sendKeys(car.getManufacture());
+        inputModel.sendKeys(car.getModel());
+        inputYear.sendKeys(car.getYear());
+        selectFuel.sendKeys(car.getFuel()); //!!!!!!!!!!!!!!!!!!! class select
+        if (car.getSeats() != null) {
+            inputSeats.sendKeys(car.getSeats().toString());
+        } else {
+            inputSeats.click();
+        }
+        inputCarClass.sendKeys(car.getCarClass());
+        inputSerialNumber.sendKeys(car.getSerialNumber());
+        if (car.getPricePerDay() != null) {
+            inputPrice.sendKeys(car.getPricePerDay().toString());
+        } else {
+            inputPrice.click();
+        }
         btnSubmit.click();
     }
 }

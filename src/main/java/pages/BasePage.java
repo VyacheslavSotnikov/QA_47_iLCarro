@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.HeaderMenuItem;
 
+import java.util.List;
+
 public abstract class BasePage {
 
     static WebDriver driver;
@@ -16,6 +18,9 @@ public abstract class BasePage {
 
     @FindBy(xpath = "//div[@class='dialog-container']")
     WebElement popUpMessage;
+
+    @FindBy(xpath = "//div[@class='error']")
+    List<WebElement> messageErrorNameList;
 
     public boolean validatePopUpMessage(String text){
         return isTextInElementPresent(popUpMessage, text);
@@ -62,5 +67,14 @@ public abstract class BasePage {
 
     public boolean elementIsEnabled(WebElement element){
         return element.isEnabled();
+    }
+
+    public boolean validateErrorMessage(String text){
+        for (WebElement e : messageErrorNameList){
+            //System.out.println(e.getText());
+            if(e.getText().contains(text))
+                return true;
+        }
+        return false;
     }
 }
