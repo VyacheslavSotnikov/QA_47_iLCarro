@@ -20,4 +20,5 @@ public class Car {
     private Double pricePerDay;
     private String about;
     private String city;
+    private String image;
 }

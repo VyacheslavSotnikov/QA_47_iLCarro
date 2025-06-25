@@ -6,7 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import utils.Fuel;
+
+import java.io.File;
 
 public class LetCarWorkPage extends BasePage{
     public LetCarWorkPage(WebDriver driver){
@@ -38,16 +42,21 @@ public class LetCarWorkPage extends BasePage{
     @FindBy(xpath = "//div[@class='pac-container']//button")
     WebElement googleMapsBtnOk;
 
+    @FindBy(xpath = "//input[@type='file']")
+    WebElement inputFile;
+
     @FindBy(xpath = "//button[@type='submit']")
     WebElement btnSubmit;
 
+
     public void typeAddNewCarForm(Car car) {
         inputCity.sendKeys(car.getCity());
-        googleMapsBtnOk.click();
+        // googleMapsBtnOk.click();
         inputManufacture.sendKeys(car.getManufacture());
         inputModel.sendKeys(car.getModel());
         inputYear.sendKeys(car.getYear());
-        selectFuel.sendKeys(car.getFuel()); //!!!!!!!!!!!!!!!!!!! class select
+//        selectFuel.sendKeys(car.getFuel()); //!!!!!!!!!!!!!!!!!!! class select
+        typeFuel(car.getFuel());
         if (car.getSeats() != null) {
             inputSeats.sendKeys(car.getSeats().toString());
         } else {
@@ -60,7 +69,21 @@ public class LetCarWorkPage extends BasePage{
         } else {
             inputPrice.click();
         }
+        //addPhoto(car.getImage());
         btnSubmit.click();
+    }
+
+    private void addPhoto(String fileName) {
+      inputFile.sendKeys(new File("src/test/resources/photos" + File.separator + fileName).getAbsolutePath());
+    }
+
+    private void typeFuel(String fuel){
+        Select select = new Select(selectFuel);
+        select.selectByValue(fuel);
+    }
+
+    public boolean isEnabledSubmitBtn(){
+        return  elementIsEnabled(btnSubmit);
     }
 
     public void typeAddNewCarFormEmptyLoc(Car car) {
