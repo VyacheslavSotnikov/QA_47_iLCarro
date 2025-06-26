@@ -78,6 +78,9 @@ public class LetCarWorkPage extends BasePage{
     }
 
     private void typeFuel(String fuel){
+        if (fuel == null || fuel.trim().isEmpty()) {
+            return;
+        }
         Select select = new Select(selectFuel);
         select.selectByValue(fuel);
     }

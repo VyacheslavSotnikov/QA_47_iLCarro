@@ -1,20 +1,21 @@
 package pages;
 
+import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.HeaderMenuItem;
 
 import java.util.List;
 
 public abstract class BasePage {
 
+    @Setter
     static WebDriver driver;
-
-    public static void setDriver(WebDriver wd) {
-        driver = wd;
-    }
+    Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     @FindBy(xpath = "//div[@class='dialog-container']")
     WebElement popUpMessage;

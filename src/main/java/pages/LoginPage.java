@@ -31,8 +31,6 @@ public class LoginPage extends BasePage{
         btnYalla.click();
     }
 
-
-
     public boolean validateMessageErrorPassword(){
         return isElementPresent(messageErrorPassword);
     }
