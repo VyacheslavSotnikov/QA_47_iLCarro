@@ -2,13 +2,17 @@ package pages;
 
 import lombok.Setter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.HeaderMenuItem;
 
+import java.time.Duration;
 import java.util.List;
 
 public abstract class BasePage {
@@ -77,5 +81,14 @@ public abstract class BasePage {
                 return true;
         }
         return false;
+    }
+
+    //document.querySelector("button[type='submit']").removeAttribute("disable")
+    public void removeDisabledBtnSearch(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");}
+    
+    public  boolean validateUrl(String part){
+       return new WebDriverWait(driver, Duration.ofSeconds(6)).until(ExpectedConditions.urlContains(part));
     }
 }
