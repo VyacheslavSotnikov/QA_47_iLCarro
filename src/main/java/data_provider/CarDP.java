@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static utils.RandomUtils.*;
 import static utils.RandomUtils.generateString;
 
 public class CarDP {

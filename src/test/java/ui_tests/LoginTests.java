@@ -10,6 +10,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import utils.TestNGListener;
 
+import static utils.Properties.getProperty;
 import static utils.RandomUtils.*;
 
 @Listeners(TestNGListener.class)
@@ -19,6 +20,10 @@ public class LoginTests extends ApplicationManager {
     LoginPage loginPage;
     @BeforeMethod
     public void goToLoginPage(){
+        UserLombok user = UserLombok.builder()
+                .username(getProperty("login.properties", "email"))
+                .password(getProperty("login.properties", "password"))
+                .build();
         homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         loginPage = new LoginPage(getDriver());
@@ -29,7 +34,7 @@ public class LoginTests extends ApplicationManager {
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.typeLoginForm("bilbo_baggins_12345@mail.com", "Password123!");
+        loginPage.typeLoginForm(UserLombok.builder().build());
     }
 
     @Test
@@ -39,7 +44,7 @@ public class LoginTests extends ApplicationManager {
                 .password("Password123!")
                 .build();
         logger.info("test data --> " + user.toString());
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Logged in success"), "loginPositiveTest_lombok");
     }
 
@@ -50,7 +55,7 @@ public class LoginTests extends ApplicationManager {
                 .password("Password123!")
                 .build();
         logger.info("test data --> " + user.toString());
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validatePopUpMessage("Login or Password incorrect"), "loginNegativeTest_unregUser");
     }
 
@@ -61,7 +66,7 @@ public class LoginTests extends ApplicationManager {
                 .password("")
                 .build();
         logger.info("test data --> " + user.toString());
-        loginPage.typeLoginForm(user.getUsername(), user.getPassword());
+        loginPage.typeLoginForm(user);
         Assert.assertTrue(loginPage.validateMessageErrorPassword(), "loginNegativeTest_EmptyPassword");
     }
 }

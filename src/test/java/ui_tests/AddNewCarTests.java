@@ -2,6 +2,7 @@ package ui_tests;
 
 import data_provider.CarDP;
 import dto.Car;
+import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -17,6 +18,7 @@ import utils.TestNGListener;
 import java.util.List;
 
 import static pages.BasePage.*;
+import static utils.Properties.getProperty;
 import static utils.RandomUtils.*;
 
 @Listeners(TestNGListener.class)
@@ -27,9 +29,13 @@ public class AddNewCarTests extends ApplicationManager {
 
     @BeforeMethod
     public void login() {
+        UserLombok user = UserLombok.builder()
+                .username(getProperty("login.properties", "email"))
+                .password(getProperty("login.properties", "password"))
+                .build();
         new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
-        loginPage.typeLoginForm("bilbo_baggins_12345@mail.com", "Password123!");
+        loginPage.typeLoginForm(user);
         letCarWorkPage = clickButtonsOnHeader(HeaderMenuItem.LET_CAR_WORK);
     }
 

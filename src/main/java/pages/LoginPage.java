@@ -1,5 +1,6 @@
 package pages;
 
+import dto.UserLombok;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,9 +26,9 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//div[text()=' Password is required ']")
     WebElement messageErrorPassword;
 
-    public void typeLoginForm(String email, String password){
-        inputEmail.sendKeys(email);
-        inputPassword.sendKeys(password);
+    public void typeLoginForm(UserLombok userLombok){
+        inputEmail.sendKeys(userLombok.getUsername());
+        inputPassword.sendKeys(userLombok.getPassword());
         btnYalla.click();
     }
 
